@@ -33,6 +33,12 @@ class PygameVisualizer(object):
         self.process.start()
         return self
         
+    def __enter__(self):
+        return self.open()
+        
+    def __exit__(self, type, value, traceback):
+        self.close()
+        
     def blit(self, array):
         if np.any(array < 0) or np.any(255 < array):
             raise ValueError('Array values should be between 0 and 255, inclusively.')
